@@ -33,19 +33,19 @@ int main(){
 //		fprintf(stderr,"A fatal error occurred for readNormTextWriteNormBinary\n");
 //		return 1;
 //	}
-//
+
 //	//Bonus - 1 bonus point
 //	//Write a function wc that reads in the text file given and count the number of lines, number of words and number of characters.
 //   //The output should be the same as given by the UNIX function wc i.e by typing the command "wc gettysburg.txt"
 //	//Hint read in char by char and use the built in C isspace() function to determine if the character is whitespace
 //
-//	if(wc("gettysburg.txt")){
-//		fprintf(stderr,"A fatal error occurred for gettysburg.txt\n");
-//		return 1;
-//	}
-//	if(c) free(c);
-//	if(vcs) free	(vcs);
-//	return 0;
-//}
-
+	if(wc("gettysburg.txt")){
+		fprintf(stderr,"A fatal error occurred for gettysburg.txt\n");
+		return 1;
+	}
+	if(c) free(c);
+	if(vcs) free(vcs);
+	return 0;
 }
+
+

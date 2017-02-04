@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 //fill in the parameters and return type
 //Can these be pointers?
 char * joinrev(char* x, char* y);
@@ -11,5 +12,5 @@ char * joinrev(char* x, char* y);
 void* joinrev_generic(void* a1, void* a2, int typeSize, int nElementsX, int nElementsY);
 int readTextAddBinary(char *vectorsTxt, char *binaryFile);
 int readBinaryNormText(char * binaryFile, char * normalFile);
-//readNormTextWriteNormBinary();
-//wc();
+//int readNormTextWriteNormBinary(char *norm, char *bin) ;
+int wc(char* file);

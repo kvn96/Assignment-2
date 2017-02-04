@@ -104,6 +104,47 @@
 		fclose(ofp);
 		return 0;
 	}
+	//Bonus - 1 bonus point
+	//	//Write a function wc that reads in the text file given and count the number of lines, number of words and number of characters.
+	//   //The output should be the same as given by the UNIX function wc i.e by typing the command "wc gettysburg.txt"
+	//	//Hint read in char by char and use the built in C isspace() function to determine if the character is whitespace
+	//This read the file like a array (sort of like hello world)
+	int wc(char* file) {
+		FILE *ifp=fopen(file,"r");
+		int nLines, nWords, nCharacters;
+		if(!ifp){
+			fprintf(stderr,"unable to locate the file \n");
+			return 1;
+		}
+		//The counters
+		nCharacters = 0;
+		nLines = 0;
+		nWords = 0;
+
+		char c;
+
+		//while loop until end of file.
+		while((c=fgetc(ifp)) != EOF) {
+			//Can't I just use ' ' instead of isspace?
+			//Comment this out if you want to consider a space as a character!
+			if(c != ' ' && c != '\n') {
+				nCharacters++;
+			}
+			//I don't know how to check if the all letters.
+			if(c == ' ' || c == '\n') {
+				//Could I have also somehow done if(isspace(c) && isspace(c+1) ?
+				nWords++;
+			}
+			if(c == '\n') {
+				nLines++;
+			}
+
+		}
+		printf("Characters (Ignoring new lines and spaces): %d \t Words: %d \t Lines: %d \n",nCharacters,nWords,nLines);
+		fclose(ifp);
+		return 0;
+	}
+
 	//Part 5 - 2 points
 	//Write a function readNormTextWriteNormBinary that takes two strings as input (filenames) and returns 0 if the function completes successfully..
     //The first argument is the text file of type produced in part 4.
@@ -114,5 +155,23 @@
 	//		fprintf(stderr,"A fatal error occurred for readNormTextWriteNormBinary\n");
 	//		return 1;
 	//	}
-   
+//   int readNormTextWriteNormBinary(char *norm, char *bin) {
+//		FILE *ifp=fopen(norm,"r");
+//		FILE *ofp=fopen(bin,"w");
+//		if(!ifp || !ofp) {
+//			return 1;
+//		}
+//
+//		while (fread(&myVector,sizeof(myVector), 1 ,ifp)){
+//			vector_normalize(&myVector);
+//			//we are just printing in this case. But we use fprintf because we are writing to a file.
+//			fprintf(ofp, "%f \t %f \t %f \t %f \t", myVector.x, myVector.y, myVector.z, myVector.length);
+//		}
+//		fclose(ifp);
+//		fclose(ofp);
+//		printf("It worked!");
+//			return 0;
+//
+//   }
+
 
