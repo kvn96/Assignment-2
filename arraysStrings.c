@@ -30,12 +30,9 @@
 	void *joinrev_generic(void* x, void* y, int typeSize, int nElementsX, int nElementsY) {
 		//This creates the void pointer, and allocating the size for it.
 		void* result = malloc(1 + typeSize*(nElementsX+nElementsY));
-		//memcpy is faster but memmove is safer/reliable, this adds the arrays to the pointer.
-		memcpy(result,x,(typeSize*nElementsX));
-		//ERROR: Remember you have to have the pointer + the index or else it outputs allot of zeroes.
-		memmove(result+(nElementsX*typeSize),y,(typeSize*nElementsY));
 		//Starts at the end of the first array. This reverses the second part of the pointer.
-		char *left=(char*)x+(nElementsX-1)*typeSize, *right=(char*)y+(nElementsY-1)*typeSize;
+		//Error: only the end (right) needs the -1 !
+		char *left=(char*)x+(nElementsX)*typeSize, *right=(char*)y+(nElementsY-1)*typeSize;
 		char temp[typeSize];
 		while(left < right){
 		  memcpy(temp,right,typeSize);
@@ -44,7 +41,10 @@
 		  left+=typeSize;
 		  right-=typeSize;
 		 }
-
+		//ERROR: Remember you have to have the pointer + the index or else it outputs allot of zeroes.
+		//memcpy is faster but memmove is safer/reliable, this adds the arrays to the pointer.
+		memcpy(result,x,(typeSize*nElementsX));
+		memmove(result+(nElementsX*typeSize),y,(typeSize*nElementsY));
 		return result;
 	}
 
@@ -94,6 +94,7 @@
 //		vector myVector = vector_init(x1 + x2, y1 + y2, z1 + z2);
 		vector myVector;
 		//We use fread rather than fgets in this case because it takes in raw data from the binary file.
+		//reads the input
 		while (fread(&myVector,sizeof(myVector), 1 ,ifp)){
 			vector_normalize(&myVector);
 			//we are just printing in this case. But we use fprintf because we are writing to a file.
