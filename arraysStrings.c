@@ -112,7 +112,7 @@
 	int wc(char* file) {
 		FILE *ifp=fopen(file,"r");
 		int nLines, nWords, nCharacters;
-		if(!ifp){
+		if(!ifp) {
 			fprintf(stderr,"unable to locate the file \n");
 			return 1;
 		}
@@ -122,25 +122,28 @@
 		nWords = 0;
 
 		char c;
+		char last = '\n';
+		if(ifp) {
+			//while loop until end of file.
+			while((c=fgetc(ifp)) != EOF) {
+				//Can't I just use ' ' instead of isspace?
 
-		//while loop until end of file.
-		while((c=fgetc(ifp)) != EOF) {
-			//Can't I just use ' ' instead of isspace?
-			//Comment this out if you want to consider a space as a character!
-			if(c != ' ' && c != '\n') {
 				nCharacters++;
-			}
-			//I don't know how to check if the all letters.
-			if(c == ' ' || c == '\n') {
-				//Could I have also somehow done if(isspace(c) && isspace(c+1) ?
-				nWords++;
-			}
-			if(c == '\n') {
-				nLines++;
-			}
+				//I don't know how to subtract word count if blank line. I looked up the 'last' online. Why does this work?
+				if((c == ' ' || c == '\n' || c == '\t')&& last != '\n') {
+					//Could I have also somehow done if(isspace(c) && isspace(c+1) ?
+					nWords++;
+				}
+				if(c == '\n') {
+					nLines++;
+				}
+				//I had to put this here (mostly trial and error).
+				last = c;
 
+			}
 		}
-		printf("Characters (Ignoring new lines and spaces): %d \t Words: %d \t Lines: %d \n",nCharacters,nWords,nLines);
+		printf("\t");
+		printf("%d \t %d \t %d %s \n",nLines,nWords,nCharacters,file);
 		fclose(ifp);
 		return 0;
 	}
@@ -161,16 +164,16 @@
 //		if(!ifp || !ofp) {
 //			return 1;
 //		}
+//		char *token
+//		//Is 0 the correct off set?
+//		fseek(ifp,0,SEEK_END);
+//		while (token){
 //
-//		while (fread(&myVector,sizeof(myVector), 1 ,ifp)){
-//			vector_normalize(&myVector);
-//			//we are just printing in this case. But we use fprintf because we are writing to a file.
-//			fprintf(ofp, "%f \t %f \t %f \t %f \t", myVector.x, myVector.y, myVector.z, myVector.length);
 //		}
 //		fclose(ifp);
 //		fclose(ofp);
 //		printf("It worked!");
-//			return 0;
+//		return 0;
 //
 //   }
 
